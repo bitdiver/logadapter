@@ -73,6 +73,9 @@ export default class LogAdapterFile extends LogAdapterConsole {
    * @param meta {object} The meta data for this log entry
    */
   _getRunTargetPath(meta) {
+    if (meta.run.name !== undefined && meta.run.name !== '') {
+      return [this.targetDir, `Run_${meta.run.name}_${meta.run.startString}`]
+    }
     return [this.targetDir, `Run_${meta.run.startString}`]
   }
 

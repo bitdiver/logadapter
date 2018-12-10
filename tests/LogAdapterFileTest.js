@@ -24,7 +24,7 @@ test('Log Message Run', async done => {
       run: {
         start: 1544432256132,
         id: 'runId', // RunEnvironment ID
-        name: 'suite name',
+        name: 'suiteName',
       },
       logTime: 1544432256132,
     },
@@ -34,7 +34,10 @@ test('Log Message Run', async done => {
 
   await logAdapter.log(logMessage)
 
-  const rootGlob = path.join(LOG_PATH, 'Run_2018-12-10_095736/**/*.json')
+  const rootGlob = path.join(
+    LOG_PATH,
+    'Run_suiteName_2018-12-10_095736/**/*.json'
+  )
   const files = await globby([rootGlob])
 
   expect(files.length).toBe(1)
@@ -42,7 +45,9 @@ test('Log Message Run', async done => {
     files[i] = path.relative(LOG_PATH, files[i])
   }
 
-  expect(files).toEqual(['Run_2018-12-10_095736/2018-12-10_095736_error.json'])
+  expect(files).toEqual([
+    'Run_suiteName_2018-12-10_095736/2018-12-10_095736_error.json',
+  ])
   done()
 })
 
@@ -61,7 +66,7 @@ test('Log Message Testcase', async done => {
       run: {
         start: 1544432286132,
         id: 'runId', // RunEnvironment ID
-        name: 'suite name',
+        name: 'suiteName',
       },
       tc: {
         countCurrent: tcCountCurrent,
@@ -78,7 +83,10 @@ test('Log Message Testcase', async done => {
 
   await logAdapter.log(logMessage)
 
-  const rootGlob = path.join(LOG_PATH, 'Run_2018-12-10_095806/**/*.json')
+  const rootGlob = path.join(
+    LOG_PATH,
+    'Run_suiteName_2018-12-10_095806/**/*.json'
+  )
   const files = await globby([rootGlob])
 
   expect(files.length).toBe(1)
@@ -87,7 +95,7 @@ test('Log Message Testcase', async done => {
   }
 
   expect(files).toEqual([
-    'Run_2018-12-10_095806/TC_03_great tc name/2018-12-10_095806_error.json',
+    'Run_suiteName_2018-12-10_095806/TC_03_great tc name/2018-12-10_095806_error.json',
   ])
   done()
 })
@@ -109,7 +117,7 @@ test('Log Message Step', async done => {
       run: {
         start: 1544432296132,
         id: 'runId', // RunEnvironment ID
-        name: 'suite name',
+        name: 'suiteName',
       },
       tc: {
         countCurrent: tcCountCurrent,
@@ -132,7 +140,10 @@ test('Log Message Step', async done => {
 
   await logAdapter.log(logMessage)
 
-  const rootGlob = path.join(LOG_PATH, 'Run_2018-12-10_095816/**/*.json')
+  const rootGlob = path.join(
+    LOG_PATH,
+    'Run_suiteName_2018-12-10_095816/**/*.json'
+  )
   const files = await globby([rootGlob])
 
   expect(files.length).toBe(1)
@@ -141,7 +152,7 @@ test('Log Message Step', async done => {
   }
 
   expect(files).toEqual([
-    'Run_2018-12-10_095816/TC_03_great tc name/Step_087_great step name/2018-12-10_095816_error.json',
+    'Run_suiteName_2018-12-10_095816/TC_03_great tc name/Step_087_great step name/2018-12-10_095816_error.json',
   ])
   done()
 })
