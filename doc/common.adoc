@@ -1,0 +1,3 @@
+== LogAdapter
+The log adapter is used to handle the log calls. All the log events from the steps or the runner
+will be forwarded to the registered log adapter.

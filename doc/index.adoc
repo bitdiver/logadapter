@@ -1,3 +1,5 @@
+include::common.adoc[]
+
 include::logAdapterConsole.adoc[]
 
 include::logAdapterMemory.adoc[]
