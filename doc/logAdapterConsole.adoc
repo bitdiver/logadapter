@@ -13,11 +13,12 @@ This LogAdapter is intended to be used as a base class for other adapters.
 const opts = {
   logLevel: 'error'                    <1>
   timeFormat: 'YYYY-MM-DD_hh:mm:ss_ZZ' <2>
+  timeZone: '60'                       <3>
 }
 ----
 <1> The logLevel of the logger. Default is ''error''.
 <2> The time format used to display times in the log. The format comes from 'momentjs.com' module.
-
+<3> Time Zone offset offset in minutes. 60 means 'gmt +00:01'
 
 
 === Methods

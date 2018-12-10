@@ -16,6 +16,7 @@ test('Log Message Run', async done => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_hhmmss',
+    timeZone: 60,
   })
 
   const logMessage = {
@@ -49,6 +50,7 @@ test('Log Message Testcase', async done => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_hhmmss',
+    timeZone: 60,
   })
 
   const tcCountCurrent = 3
@@ -94,6 +96,7 @@ test('Log Message Step', async done => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_hhmmss',
+    timeZone: 60,
   })
 
   const tcCountCurrent = 3

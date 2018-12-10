@@ -26,6 +26,7 @@ export default class LogAdapterConsole {
 
     this.level = opts.logLevel
 
+    this.timeZone = opts.timeZone ? opts.timeZone : moment().utcOffset()
     this.timeFormat = opts.timeFormat
       ? opts.timeFormat
       : 'YYYY-MM-DD_hh:mm:ss_ZZ'
@@ -166,10 +167,14 @@ export default class LogAdapterConsole {
     if (meta.logTime === undefined) {
       meta.logTime = Date.now()
     }
-    meta.logTimeString = moment(meta.logTime).format(this.timeFormat)
+    meta.logTimeString = moment(meta.logTime)
+      .utcOffset(this.timeZone)
+      .format(this.timeFormat)
 
     if (meta.run.start !== undefined) {
-      meta.run.startString = moment(meta.run.start).format(this.timeFormat)
+      meta.run.startString = moment(meta.run.start)
+        .utcOffset(this.timeZone)
+        .format(this.timeFormat)
     }
 
     // set the loglevel

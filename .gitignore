@@ -5,3 +5,4 @@ jsdoc
 npm-debug.log
 yarn.lock
 tests/volatile
+package-lock.json
