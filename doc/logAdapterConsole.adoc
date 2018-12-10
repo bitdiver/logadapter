@@ -1,0 +1,64 @@
+== LogAdapterConsole
+This logger just logs to the console output. It implements the main logic other
+log adapter may need.
+
+This LogAdapter is intended to be used as a base class for other adapters.
+
+
+=== Konfiguration options
+
+.configuration
+[source, js]
+----
+const opts = {
+  logLevel: 'error'                    <1>
+  timeFormat: 'YYYY-MM-DD_hh:mm:ss_ZZ' <2>
+}
+----
+<1> The logLevel of the logger. Default is ''error''.
+<2> The time format used to display times in the log. The format comes from 'momentjs.com' module.
+
+
+
+=== Methods
+
+[source, js]
+----
+logAdapter.log(logMessage) : promise
+----
+
+
+.Format of the logMessage
+[source, js]
+----
+const logMessage = {
+  meta: {                             <1>
+    run: {
+      start: new Date(),
+      id: 'runId',
+      name: 'suite name',
+    },
+    tc: {                             <2>
+      countCurrent: tcCountCurrent,
+      countAll: tcCountAll,
+      id: 'tcId',
+      name: 'great tc name',
+    },
+    step: {                           <3>
+      countCurrent: stepCountCurrent,
+      countAll: stepCountAll,
+      id: 'stepId',
+      name: 'great step name',
+      typ: 'singel',
+    },
+  },
+  data: { anyKey: 'some value' },     <4>
+  logLevel: 'error',                  <5>
+}
+
+----
+<1> The 'run' section of the meta block is always there. No log without a run. This is filled automatically.
+<2> If the log comes from a test case or a step also the 'tc' section is provided. This is filled automatically.
+<3> The 'step' section is only provided if the log was initiated by a step. This is filled automatically.
+<4> The 'data' section contains the real message data.
+<5> The logLevel is also set automatically.

@@ -1,0 +1,17 @@
+== LogAdapterFile
+Stores the logs into a local file system.
+It will create one directory per run. Then in the run directory one directory per
+test case. And again in the test case one directory per step.
+
+
+=== Konfiguration options
+
+.configuration
+[source, js]
+----
+const opts = {
+  targetDir: 'logs'   <1>
+}
+----
+<1> The constructor arguments are the 'targetDir'. All the logs will be stored under this directory.
+This parameter defaults to ''log''

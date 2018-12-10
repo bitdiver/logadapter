@@ -1,0 +1,42 @@
+== LogAdapterMemory
+This is a special implementation of a LogAdapter. Its mainly used for testing.
+If there is a unit test for a step this adapter could be used to collect the
+created logs to validate them
+
+
+.Format the data is stored
+[source, js]
+----
+const this.logs = {   <1>
+  runId: {            <2>
+    logs:[{}, ...]    <3>
+    testcases: {}     <4>
+  }
+}
+----
+<1> The data is stored under the property 'logs' of the LogAdapter.
+<2> The data is stored per run by the run Id. Normally there will be only one run at a time.
+<3> This log stores all the logs directly related to the run.
+<4> Logs which are related to a test case are stored by the test case instance id under this property.
+
+
+.Format of the test case section
+[source, js]
+----
+const testcase = {
+  logs: []     <1>
+  steps: {}    <2>
+}
+----
+<1> This log stores all the logs directly related to the test case.
+<2> Logs which are related to a step are stored by the step instance id under this property.
+
+
+.Format of the step section
+[source, js]
+----
+const step = {
+  logs: []    <1>
+}
+----
+<1> This log stores all the logs directly related to the step.
