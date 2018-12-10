@@ -11,7 +11,6 @@ const LOG_LEVEL_NAME_TO_NUM = {
 }
 
 const LOG_LEVEL_NUM_TO_NAME = ['debug', 'info', 'warning', 'error', 'fatal']
-
 const DEFAULT_LEVEL = 3
 const MAX_LEVEL = 4
 
