@@ -20,7 +20,7 @@ import LogAdapterConsole from './LogAdapterConsole'
  * }
  *
  */
-export class LogAdapterMemory extends LogAdapterConsole {
+export default class LogAdapterMemory extends LogAdapterConsole {
   constructor(opts) {
     super(opts)
 

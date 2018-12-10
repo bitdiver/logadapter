@@ -2,6 +2,11 @@ import LogAdapterConsole from './LogAdapterConsole'
 import LogAdapterMemory from './LogAdapterMemory'
 import LogAdapterFile from './LogAdapterFile'
 
+const LEVEL_DEBUG = 'debug'
+const LEVEL_INFO = 'info'
+const LEVEL_WARNING = 'warning'
+const LEVEL_ERROR = 'error'
+const LEVEL_FATAL = 'fatal'
 
 // Stores the logger instance
 let logAdapterConsole
@@ -38,5 +43,16 @@ function getLogAdapterFile(opts) {
   return logAdapterFile
 }
 
-
-export { LogAdapterConsole, LogAdapterMemory, LogAdapterFile, getLogAdapterConsole, getLogAdapterMemory, getLogAdapterFile }
+export {
+  LogAdapterConsole,
+  LogAdapterMemory,
+  LogAdapterFile,
+  getLogAdapterConsole,
+  getLogAdapterMemory,
+  getLogAdapterFile,
+  LEVEL_DEBUG,
+  LEVEL_INFO,
+  LEVEL_WARNING,
+  LEVEL_ERROR,
+  LEVEL_FATAL,
+}
