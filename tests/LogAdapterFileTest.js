@@ -15,7 +15,7 @@ beforeAll(async () => {
 test('Log Message Run', async done => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
-    timeFormat: 'YYYY-MM-DD_hhmmss',
+    timeFormat: 'YYYY-MM-DD_HHmmss',
     timeZone: 60,
   })
 
@@ -49,7 +49,7 @@ test('Log Message Run', async done => {
 test('Log Message Testcase', async done => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
-    timeFormat: 'YYYY-MM-DD_hhmmss',
+    timeFormat: 'YYYY-MM-DD_HHmmss',
     timeZone: 60,
   })
 
@@ -95,7 +95,7 @@ test('Log Message Testcase', async done => {
 test('Log Message Step', async done => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
-    timeFormat: 'YYYY-MM-DD_hhmmss',
+    timeFormat: 'YYYY-MM-DD_HHmmss',
     timeZone: 60,
   })
 

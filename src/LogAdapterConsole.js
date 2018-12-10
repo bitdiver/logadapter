@@ -28,7 +28,7 @@ export default class LogAdapterConsole {
     this.timeZone = opts.timeZone ? opts.timeZone : moment().utcOffset()
     this.timeFormat = opts.timeFormat
       ? opts.timeFormat
-      : 'YYYY-MM-DD_hh:mm:ss_ZZ'
+      : 'YYYY-MM-DD_HH:mm:ss_ZZ'
   }
 
   /**
