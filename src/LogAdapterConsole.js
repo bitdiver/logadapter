@@ -65,7 +65,6 @@ export default class LogAdapterConsole {
 
   /**
    * Returns the logLevel as a string
-   *
    * @return level {string} The logLevel
    */
   get level() {
