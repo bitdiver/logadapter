@@ -48,14 +48,14 @@ export default class LogAdapterConsole {
   _createLogLevel(level) {
     if (level !== undefined) {
       if (typeof level === 'number') {
-        if (level > 0 && level <= MAX_LEVEL) {
+        if (level >= 0 && level <= MAX_LEVEL) {
           return level
         }
       } else if (isNaN(level)) {
         return this._getLevelNumber(level)
       } else {
         const levelNum = parseInt(level, 10)
-        if (levelNum > 0 && levelNum <= MAX_LEVEL) {
+        if (levelNum >= 0 && levelNum <= MAX_LEVEL) {
           return levelNum
         }
       }
