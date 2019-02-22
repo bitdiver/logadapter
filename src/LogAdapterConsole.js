@@ -212,10 +212,14 @@ export default class LogAdapterConsole {
   async _logStep(meta, data, logLevel) {
     const testcaseName = meta.tc.name
     const stepName = meta.step.name
+    let message = ''
+    if (data.message !== undefined) {
+      message = data.message
+    }
     // eslint-disable-next-line no-console
     console.log(
       'Step: ',
-      `${testcaseName}->${stepName}:\n${{ data, logLevel }}`
+      `${logLevel} ${testcaseName}->${stepName} ${message}:\n${data}`
     )
   }
 }
