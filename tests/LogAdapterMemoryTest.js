@@ -296,3 +296,138 @@ test('log step', async done => {
   expect(resStep).toEqual([{ ...logMessage, logLevel: 'error' }])
   done()
 })
+
+test('Test reset and log step', async done => {
+  const logAdapter = new LogAdapterMemory({ logLevel: 2 })
+
+  // this is a run message
+  const logMessage = {
+    meta: {
+      run: {
+        start: 1533720241284,
+        id: '0815',
+      },
+      tc: {
+        id: 'gum',
+        name: 'my tc name',
+        countAll: 100,
+        countCurrent: 5,
+      },
+      step: { id: 'bo', name: 'my step name', countAll: 15, countCurrent: 3 },
+    },
+    data: {},
+    logLevel: 3,
+  }
+
+  await logAdapter.log(logMessage)
+
+  expect(logAdapter.logs).toEqual({
+    '0815': {
+      logs: [],
+      testcases: {
+        'my tc name': {
+          countAll: 100,
+          countCurrent: 5,
+          logs: [],
+          steps: {
+            'my step name': {
+              logs: [
+                {
+                  countAll: 15,
+                  countCurrent: 3,
+                  data: {},
+                  logLevel: 'error',
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  })
+
+  logAdapter.reset()
+  expect(logAdapter.logs).toEqual({})
+
+  done()
+})
+
+test('Test log run', async done => {
+  const logAdapter = new LogAdapterMemory({ logLevel: 2 })
+
+  // this is a run message
+  const logMessage = {
+    meta: {
+      run: {
+        start: 1533720241284,
+        id: '0815',
+      },
+    },
+    data: { gum: 'bo' },
+    logLevel: 3,
+  }
+
+  await logAdapter.log(logMessage)
+
+  expect(logAdapter.logs).toEqual({
+    '0815': {
+      logs: [{ data: { gum: 'bo' }, logLevel: 'error' }],
+      testcases: {},
+    },
+  })
+
+  logAdapter.reset()
+  expect(logAdapter.logs).toEqual({})
+
+  done()
+})
+
+test('Test log test case', async done => {
+  const logAdapter = new LogAdapterMemory({ logLevel: 2 })
+
+  // this is a run message
+  const logMessage = {
+    meta: {
+      run: {
+        start: 1533720241284,
+        id: '0815',
+      },
+      tc: {
+        id: 'gum',
+        name: 'my tc name',
+        countAll: 100,
+        countCurrent: 5,
+      },
+    },
+    data: { gum: 'bo' },
+    logLevel: 3,
+  }
+
+  await logAdapter.log(logMessage)
+
+  expect(logAdapter.logs).toEqual({
+    '0815': {
+      logs: [],
+      testcases: {
+        'my tc name': {
+          countAll: 100,
+          countCurrent: 5,
+          logs: [
+            {
+              countAll: 100,
+              countCurrent: 5,
+              data: { gum: 'bo' },
+              logLevel: 'error',
+            },
+          ],
+          steps: {},
+        },
+      },
+    },
+  })
+
+  logAdapter.reset()
+  expect(logAdapter.logs).toEqual({})
+
+  done()
+})
