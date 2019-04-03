@@ -1,5 +1,6 @@
 import {
   LogAdapterConsole,
+  LogAdapterConsoleJson,
   LogAdapterMemory,
   LogAdapterFile,
   getLogAdapterConsole,
@@ -30,6 +31,11 @@ test('LEVEL_FATAL', () => {
 
 test('LogAdapterConsole', () => {
   const logAdapter = new LogAdapterConsole()
+  expect(logAdapter).toBeDefined()
+})
+
+test('LogAdapterConsoleJson', () => {
+  const logAdapter = new LogAdapterConsoleJson()
   expect(logAdapter).toBeDefined()
 })
 
