@@ -1,6 +1,7 @@
 import {
   LogAdapterConsole,
   LogAdapterConsoleJson,
+  LogAdapterConsoleJsonElastic,
   LogAdapterMemory,
   LogAdapterFile,
   getLogAdapterConsole,
@@ -36,6 +37,11 @@ test('LogAdapterConsole', () => {
 
 test('LogAdapterConsoleJson', () => {
   const logAdapter = new LogAdapterConsoleJson()
+  expect(logAdapter).toBeDefined()
+})
+
+test('LogAdapterConsoleJsonElastic', () => {
+  const logAdapter = new LogAdapterConsoleJsonElastic()
   expect(logAdapter).toBeDefined()
 })
 

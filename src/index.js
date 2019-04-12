@@ -1,5 +1,6 @@
 import LogAdapterConsole from './LogAdapterConsole'
 import LogAdapterConsoleJson from './LogAdapterConsoleJson'
+import LogAdapterConsoleJsonElastic from './LogAdapterConsoleJsonElastic'
 import LogAdapterMemory from './LogAdapterMemory'
 import LogAdapterFile from './LogAdapterFile'
 
@@ -12,6 +13,7 @@ const LEVEL_FATAL = 'fatal'
 // Stores the logger instance
 let logAdapterConsole
 let logAdapterConsoleJson
+let logAdapterConsoleJsonElastic
 let logAdapterMemory
 let logAdapterFile
 
@@ -38,6 +40,16 @@ function getLogAdapterConsoleJson(opts) {
 /**
  * returns the logAdapter
  */
+function getLogAdapterConsoleJsonElastic(opts) {
+  if (logAdapterConsoleJsonElastic === undefined) {
+    logAdapterConsoleJsonElastic = new LogAdapterConsoleJsonElastic(opts)
+  }
+  return logAdapterConsoleJsonElastic
+}
+
+/**
+ * returns the logAdapter
+ */
 function getLogAdapterMemory(opts) {
   if (logAdapterMemory === undefined) {
     logAdapterMemory = new LogAdapterMemory(opts)
@@ -58,10 +70,12 @@ function getLogAdapterFile(opts) {
 export {
   LogAdapterConsole,
   LogAdapterConsoleJson,
+  LogAdapterConsoleJsonElastic,
   LogAdapterMemory,
   LogAdapterFile,
   getLogAdapterConsole,
   getLogAdapterConsoleJson,
+  getLogAdapterConsoleJsonElastic,
   getLogAdapterMemory,
   getLogAdapterFile,
   LEVEL_DEBUG,
