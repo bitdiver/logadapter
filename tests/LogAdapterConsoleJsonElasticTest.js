@@ -267,3 +267,41 @@ test('log step', async done => {
   expect(res).toEqual([{ ...logMessage, logLevel: 'error' }])
   done()
 })
+
+test('log step with json data content', async done => {
+  const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 2 })
+
+  const res = []
+  logAdapter._writeLog = async logMessage => {
+    res.push(logMessage)
+  }
+
+  // this is a run message
+  const logMessage = {
+    meta: {
+      run: {
+        start: 1533720241284,
+      },
+      tc: {
+        id: 'gum',
+      },
+      step: { id: 'bo' },
+    },
+    data: {
+      message: 'Could not clear the abo',
+    },
+  }
+
+  await logAdapter.log(logMessage)
+
+  expect(res).toEqual([{ ...logMessage, logLevel: 'error' }])
+  expect(res).toEqual([
+    {
+      ...logMessage,
+      data: {
+        message: 'Could not clear the abo',
+      },
+    },
+  ])
+  done()
+})
