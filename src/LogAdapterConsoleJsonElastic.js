@@ -176,8 +176,7 @@ export default class LogAdapterConsoleJsonElastic {
     }
 
     const dataString = JSON.stringify(data)
-    const dat = JSON.stringify({ logLevel, meta, data:dataString })
-    const outputJson = JSON.stringify(dat, null, 2)
+    const outputJson = JSON.stringify({ logLevel, meta, data: dataString })
     // eslint-disable-next-line no-console
     console.log(outputJson)
   }
