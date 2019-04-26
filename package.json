@@ -60,7 +60,7 @@
 		"semantic-release": "15.13.3"
 	},
 	"dependencies": {
-		"@babel/runtime": "7.4.3",
+		"@babel/runtime": "7.4.4",
 		"mkdirp": "0.5.1",
 		"moment": "2.24.0"
 	}
