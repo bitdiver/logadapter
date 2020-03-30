@@ -175,7 +175,9 @@ export default class LogAdapterConsole {
         .format(this.timeFormat)
     }
 
-    // eslint-disable-next-line no-console
-    console.log(JSON.stringify({ logLevel, meta, data }))
+    if (meta.step !== undefined && meta.step.id !== undefined) {
+      // eslint-disable-next-line no-console
+      console.log(JSON.stringify({ logLevel, meta, data }))
+    }
   }
 }

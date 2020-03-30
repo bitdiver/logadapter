@@ -7,7 +7,6 @@ import LogAdapterConsole from './LogAdapterConsole'
 
 const writeFile = util.promisify(fs.writeFile)
 const fileNameFree = util.promisify(fs.access)
-const md = util.promisify(mkdirp)
 
 /**
  * Implements a default logAdapter. The results will be written to the file system
@@ -87,7 +86,7 @@ export default class LogAdapterFile extends LogAdapterConsole {
    * @param targetPath {array} An array of path segemnts
    */
   async _writeLogFile(meta, data, logLevel, targetPath) {
-    await md(path.join(...targetPath))
+    await mkdirp(path.join(...targetPath))
 
     const file = await this._getFileName(
       targetPath,
@@ -132,7 +131,6 @@ export default class LogAdapterFile extends LogAdapterConsole {
         await fileNameFree(fileName, fs.constants.F_OK)
         fileIsOk = false
       } catch (e) {
-        // eslint-disable-line no-unsed-vars
         fileIsOk = true
       }
 

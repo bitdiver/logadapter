@@ -1,48 +1,48 @@
-import { LogAdapterConsole } from '../lib/index'
+import { LogAdapterConsole } from '../src/index'
 
-test('init LogAdapter: default loglevel', async done => {
+test('init LogAdapter: default loglevel', async (done) => {
   const logAdapter = new LogAdapterConsole()
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
   done()
 })
 
-test('init LogAdapter: unknown loglevel init. Should end in default level', async done => {
+test('init LogAdapter: unknown loglevel init. Should end in default level', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 'gum' })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
   done()
 })
 
-test('init LogAdapter: text loglevel.', async done => {
+test('init LogAdapter: text loglevel.', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 'info' })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
   done()
 })
 
-test('init LogAdapter: number loglevel.', async done => {
+test('init LogAdapter: number loglevel.', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 1 })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
   done()
 })
 
-test('init LogAdapter: number in string.', async done => {
+test('init LogAdapter: number in string.', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: '1' })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
   done()
 })
 
-test('init LogAdapter: number > maxlevel.', async done => {
+test('init LogAdapter: number > maxlevel.', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 7 })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
   done()
 })
 
-test('init LogAdapter: number in string > maxlevel.', async done => {
+test('init LogAdapter: number in string > maxlevel.', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: '7' })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
@@ -77,11 +77,11 @@ test('Log message data property is missing', () => {
   )
 })
 
-test('LogLevel < level of Logadapter', async done => {
+test('LogLevel < level of Logadapter', async (done) => {
   const logAdapter = new LogAdapterConsole()
 
   const res = []
-  logAdapter._writeLog = async logMessage => {
+  logAdapter._writeLog = async (logMessage) => {
     res.push(logMessage)
   }
 
@@ -99,11 +99,11 @@ test('LogLevel < level of Logadapter', async done => {
   done()
 })
 
-test('LogLevel >= level of Logadapter', async done => {
+test('LogLevel >= level of Logadapter', async (done) => {
   const logAdapter = new LogAdapterConsole()
 
   const res = []
-  logAdapter._writeLog = async logMessage => {
+  logAdapter._writeLog = async (logMessage) => {
     res.push(logMessage)
   }
 
@@ -122,11 +122,11 @@ test('LogLevel >= level of Logadapter', async done => {
   done()
 })
 
-test('LogLevel not given. LogAdapter level = error', async done => {
+test('LogLevel not given. LogAdapter level = error', async (done) => {
   const logAdapter = new LogAdapterConsole()
 
   const res = []
-  logAdapter._writeLog = async logMessage => {
+  logAdapter._writeLog = async (logMessage) => {
     res.push(logMessage)
   }
 
@@ -144,11 +144,11 @@ test('LogLevel not given. LogAdapter level = error', async done => {
   done()
 })
 
-test('LogLevel not given. LogAdapter level = debug', async done => {
+test('LogLevel not given. LogAdapter level = debug', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 0 })
 
   const res = []
-  logAdapter._writeLog = async logMessage => {
+  logAdapter._writeLog = async (logMessage) => {
     res.push(logMessage)
   }
 
@@ -166,11 +166,11 @@ test('LogLevel not given. LogAdapter level = debug', async done => {
   done()
 })
 
-test('LogLevel not given. LogAdapter level = fatal', async done => {
+test('LogLevel not given. LogAdapter level = fatal', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 4 })
 
   const res = []
-  logAdapter._writeLog = async logMessage => {
+  logAdapter._writeLog = async (logMessage) => {
     res.push(logMessage)
   }
 
@@ -188,7 +188,7 @@ test('LogLevel not given. LogAdapter level = fatal', async done => {
   done()
 })
 
-test('log run', async done => {
+test('log run', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 2 })
 
   const resRun = []
@@ -222,7 +222,7 @@ test('log run', async done => {
   done()
 })
 
-test('log test case', async done => {
+test('log test case', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 2 })
 
   const resRun = []
@@ -259,7 +259,7 @@ test('log test case', async done => {
   done()
 })
 
-test('log step', async done => {
+test('log step', async (done) => {
   const logAdapter = new LogAdapterConsole({ logLevel: 2 })
 
   const resRun = []

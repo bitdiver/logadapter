@@ -175,9 +175,12 @@ export default class LogAdapterConsoleJsonElastic {
         .format(this.timeFormat)
     }
 
-    const dataString = JSON.stringify(data)
-    const outputJson = JSON.stringify({ logLevel, meta, data: dataString })
-    // eslint-disable-next-line no-console
-    console.log(outputJson)
+    if (meta.step !== undefined && meta.step.id !== undefined) {
+      const dataString = JSON.stringify(data)
+      const outputJson = JSON.stringify({ logLevel, meta, data: dataString })
+
+      // eslint-disable-next-line no-console
+      console.log(outputJson)
+    }
   }
 }

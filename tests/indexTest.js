@@ -12,7 +12,7 @@ import {
   LEVEL_WARNING,
   LEVEL_ERROR,
   LEVEL_FATAL,
-} from '../lib/index'
+} from '../src/index'
 
 test('LEVEL_DEBUG', () => {
   expect(LEVEL_DEBUG).toEqual('debug')

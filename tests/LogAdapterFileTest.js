@@ -1,4 +1,4 @@
-import { LogAdapterFile } from '../lib/index'
+import { LogAdapterFile } from '../src/index'
 import path from 'path'
 import rimraf from 'rimraf'
 import util from 'util'
@@ -12,7 +12,7 @@ beforeAll(async () => {
   await rm(LOG_PATH)
 })
 
-test('Log Message Run', async done => {
+test('Log Message Run', async (done) => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
@@ -51,7 +51,7 @@ test('Log Message Run', async done => {
   done()
 })
 
-test('Log Message Testcase', async done => {
+test('Log Message Testcase', async (done) => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
@@ -100,7 +100,7 @@ test('Log Message Testcase', async done => {
   done()
 })
 
-test('Log Message Step', async done => {
+test('Log Message Step', async (done) => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
