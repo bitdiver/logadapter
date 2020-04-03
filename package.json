@@ -61,7 +61,7 @@
 	},
 	"dependencies": {
 		"@babel/runtime": "7.9.2",
-		"mkdirp": "1.0.3",
+		"mkdirp": "1.0.4",
 		"moment": "2.24.0"
 	}
 }
