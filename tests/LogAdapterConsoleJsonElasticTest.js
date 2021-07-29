@@ -1,52 +1,45 @@
 import { LogAdapterConsoleJsonElastic } from '../src/index'
 
-test('init LogAdapter: default loglevel', async (done) => {
+test('init LogAdapter: default loglevel', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic()
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
-  done()
 })
 
-test('init LogAdapter: unknown loglevel init. Should end in default level', async (done) => {
+test('init LogAdapter: unknown loglevel init. Should end in default level', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 'gum' })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
-  done()
 })
 
-test('init LogAdapter: text loglevel.', async (done) => {
+test('init LogAdapter: text loglevel.', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 'info' })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
-  done()
 })
 
-test('init LogAdapter: number loglevel.', async (done) => {
+test('init LogAdapter: number loglevel.', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 1 })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
-  done()
 })
 
-test('init LogAdapter: number in string.', async (done) => {
+test('init LogAdapter: number in string.', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: '1' })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
-  done()
 })
 
-test('init LogAdapter: number > maxlevel.', async (done) => {
+test('init LogAdapter: number > maxlevel.', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 7 })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
-  done()
 })
 
-test('init LogAdapter: number in string > maxlevel.', async (done) => {
+test('init LogAdapter: number in string > maxlevel.', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: '7' })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
-  done()
 })
 
 test('No log message given', () => {
@@ -77,7 +70,7 @@ test('Log message data property is missing', () => {
   )
 })
 
-test('LogLevel < level of Logadapter', async (done) => {
+test('LogLevel < level of Logadapter', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic()
 
   const res = []
@@ -96,10 +89,9 @@ test('LogLevel < level of Logadapter', async (done) => {
   }
   await logAdapter.log(logMessage)
   expect(res).toEqual([])
-  done()
 })
 
-test('LogLevel >= level of Logadapter', async (done) => {
+test('LogLevel >= level of Logadapter', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic()
 
   const res = []
@@ -119,10 +111,9 @@ test('LogLevel >= level of Logadapter', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([logMessage])
-  done()
 })
 
-test('LogLevel not given. LogAdapter level = error', async (done) => {
+test('LogLevel not given. LogAdapter level = error', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic()
 
   const res = []
@@ -141,10 +132,9 @@ test('LogLevel not given. LogAdapter level = error', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([logMessage])
-  done()
 })
 
-test('LogLevel not given. LogAdapter level = debug', async (done) => {
+test('LogLevel not given. LogAdapter level = debug', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 0 })
 
   const res = []
@@ -163,10 +153,9 @@ test('LogLevel not given. LogAdapter level = debug', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([logMessage])
-  done()
 })
 
-test('LogLevel not given. LogAdapter level = fatal', async (done) => {
+test('LogLevel not given. LogAdapter level = fatal', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 4 })
 
   const res = []
@@ -185,10 +174,9 @@ test('LogLevel not given. LogAdapter level = fatal', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([])
-  done()
 })
 
-test('log run', async (done) => {
+test('log run', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 2 })
 
   const res = []
@@ -209,11 +197,9 @@ test('log run', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([{ ...logMessage, logLevel: 'error' }])
-
-  done()
 })
 
-test('log test case', async (done) => {
+test('log test case', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 2 })
 
   const res = []
@@ -237,10 +223,9 @@ test('log test case', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([{ ...logMessage, logLevel: 'error' }])
-  done()
 })
 
-test('log step', async (done) => {
+test('log step', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 2 })
 
   const res = []
@@ -265,10 +250,9 @@ test('log step', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([{ ...logMessage, logLevel: 'error' }])
-  done()
 })
 
-test('show log step with json data content', async (done) => {
+test('show log step with json data content', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic({ logLevel: 0 })
 
   // this is a run message
@@ -288,6 +272,4 @@ test('show log step with json data content', async (done) => {
   }
 
   await logAdapter.log(logMessage)
-
-  done()
 })

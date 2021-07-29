@@ -1,52 +1,45 @@
 import { LogAdapterMemory } from '../src/index'
 
-test('init LogAdapter: default loglevel', async (done) => {
+test('init LogAdapter: default loglevel', async () => {
   const logAdapter = new LogAdapterMemory()
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
-  done()
 })
 
-test('init LogAdapter: unknown loglevel init. Should end in default level', async (done) => {
+test('init LogAdapter: unknown loglevel init. Should end in default level', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 'gum' })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
-  done()
 })
 
-test('init LogAdapter: text loglevel.', async (done) => {
+test('init LogAdapter: text loglevel.', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 'info' })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
-  done()
 })
 
-test('init LogAdapter: number loglevel.', async (done) => {
+test('init LogAdapter: number loglevel.', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 1 })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
-  done()
 })
 
-test('init LogAdapter: number in string.', async (done) => {
+test('init LogAdapter: number in string.', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: '1' })
   expect(logAdapter.level).toEqual('info')
   expect(logAdapter.levelNumber).toEqual(1)
-  done()
 })
 
-test('init LogAdapter: number > maxlevel.', async (done) => {
+test('init LogAdapter: number > maxlevel.', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 7 })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
-  done()
 })
 
-test('init LogAdapter: number in string > maxlevel.', async (done) => {
+test('init LogAdapter: number in string > maxlevel.', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: '7' })
   expect(logAdapter.level).toEqual('error')
   expect(logAdapter.levelNumber).toEqual(3)
-  done()
 })
 
 test('No log message given', () => {
@@ -77,7 +70,7 @@ test('Log message data property is missing', () => {
   )
 })
 
-test('LogLevel < level of Logadapter', async (done) => {
+test('LogLevel < level of Logadapter', async () => {
   const logAdapter = new LogAdapterMemory()
 
   const res = []
@@ -96,10 +89,9 @@ test('LogLevel < level of Logadapter', async (done) => {
   }
   await logAdapter.log(logMessage)
   expect(res).toEqual([])
-  done()
 })
 
-test('LogLevel >= level of Logadapter', async (done) => {
+test('LogLevel >= level of Logadapter', async () => {
   const logAdapter = new LogAdapterMemory()
 
   const res = []
@@ -119,10 +111,9 @@ test('LogLevel >= level of Logadapter', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([logMessage])
-  done()
 })
 
-test('LogLevel not given. LogAdapter level = error', async (done) => {
+test('LogLevel not given. LogAdapter level = error', async () => {
   const logAdapter = new LogAdapterMemory()
 
   const res = []
@@ -141,10 +132,9 @@ test('LogLevel not given. LogAdapter level = error', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([logMessage])
-  done()
 })
 
-test('LogLevel not given. LogAdapter level = debug', async (done) => {
+test('LogLevel not given. LogAdapter level = debug', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 0 })
 
   const res = []
@@ -163,10 +153,9 @@ test('LogLevel not given. LogAdapter level = debug', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([logMessage])
-  done()
 })
 
-test('LogLevel not given. LogAdapter level = fatal', async (done) => {
+test('LogLevel not given. LogAdapter level = fatal', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 4 })
 
   const res = []
@@ -185,10 +174,9 @@ test('LogLevel not given. LogAdapter level = fatal', async (done) => {
   await logAdapter.log(logMessage)
 
   expect(res).toEqual([])
-  done()
 })
 
-test('log run', async (done) => {
+test('log run', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 2 })
 
   const resRun = []
@@ -219,10 +207,9 @@ test('log run', async (done) => {
   expect(resRun).toEqual([{ ...logMessage, logLevel: 'error' }])
   expect(resTc).toEqual([])
   expect(resStep).toEqual([])
-  done()
 })
 
-test('log test case', async (done) => {
+test('log test case', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 2 })
 
   const resRun = []
@@ -256,10 +243,9 @@ test('log test case', async (done) => {
   expect(resRun).toEqual([])
   expect(resTc).toEqual([{ ...logMessage, logLevel: 'error' }])
   expect(resStep).toEqual([])
-  done()
 })
 
-test('log step', async (done) => {
+test('log step', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 2 })
 
   const resRun = []
@@ -294,10 +280,9 @@ test('log step', async (done) => {
   expect(resRun).toEqual([])
   expect(resTc).toEqual([])
   expect(resStep).toEqual([{ ...logMessage, logLevel: 'error' }])
-  done()
 })
 
-test('Test reset and log step', async (done) => {
+test('Test reset and log step', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 2 })
 
   // this is a run message
@@ -348,11 +333,9 @@ test('Test reset and log step', async (done) => {
 
   logAdapter.reset()
   expect(logAdapter.logs).toEqual({})
-
-  done()
 })
 
-test('Test log run', async (done) => {
+test('Test log run', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 2 })
 
   // this is a run message
@@ -378,11 +361,9 @@ test('Test log run', async (done) => {
 
   logAdapter.reset()
   expect(logAdapter.logs).toEqual({})
-
-  done()
 })
 
-test('Test log test case', async (done) => {
+test('Test log test case', async () => {
   const logAdapter = new LogAdapterMemory({ logLevel: 2 })
 
   // this is a run message
@@ -428,6 +409,4 @@ test('Test log test case', async (done) => {
 
   logAdapter.reset()
   expect(logAdapter.logs).toEqual({})
-
-  done()
 })

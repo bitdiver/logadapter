@@ -12,7 +12,7 @@ beforeAll(async () => {
   await rm(LOG_PATH)
 })
 
-test('Log Message Run', async (done) => {
+test('Log Message Run', async () => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
@@ -48,10 +48,9 @@ test('Log Message Run', async (done) => {
   expect(files).toEqual([
     'Run_suiteName_2018-12-10_095736/2018-12-10_095736_error.json',
   ])
-  done()
 })
 
-test('Log Message Testcase', async (done) => {
+test('Log Message Testcase', async () => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
@@ -97,10 +96,9 @@ test('Log Message Testcase', async (done) => {
   expect(files).toEqual([
     'Run_suiteName_2018-12-10_095806/TC_03_great tc name/2018-12-10_095806_error.json',
   ])
-  done()
 })
 
-test('Log Message Step', async (done) => {
+test('Log Message Step', async () => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
@@ -154,5 +152,4 @@ test('Log Message Step', async (done) => {
   expect(files).toEqual([
     'Run_suiteName_2018-12-10_095816/TC_03_great tc name/Step_087_great step name/2018-12-10_095816_error.json',
   ])
-  done()
 })
