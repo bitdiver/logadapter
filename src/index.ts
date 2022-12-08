@@ -1,6 +1,7 @@
 export { LogAdapterInterface } from './interfaceLogAdapter'
 export { LogMessageInterface as LogMessage } from './interfaceLogMessage'
 export { LogAdapterConsole } from './LogAdapterConsole'
+export { LogAdapterConsoleJson } from './LogAdapterConsoleJson'
 
 export {
   LEVEL_DEBUG,

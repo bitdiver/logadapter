@@ -37,13 +37,17 @@
 	],
 	"license": "ISC",
 	"devDependencies": {
+		"@types/clone": "^2.1.1",
+		"@types/luxon": "^3.1.0",
 		"@xhubio/build-base": "1.0.3",
 		"globby": "11.0.1",
 		"rimraf": "3.0.2"
 	},
 	"dependencies": {
+		"clone": "^2.1.2",
+		"luxon": "^3.1.1",
 		"mkdirp": "1.0.4",
-		"moment": "2.29.2",
+		"moment": "^2.29.4",
 		"sprintf-js": "^1.1.2"
 	}
 }

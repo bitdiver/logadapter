@@ -9,7 +9,7 @@ export interface LogMessageInterface {
     /** Meta information about the step */
     step?: LogMessageStepInterface
 
-    /** The timestamp when the message was created */
+    /** The timestamp when the message was created in milliseconds */
     logTime?: number
   }
 
@@ -22,7 +22,7 @@ export interface LogMessageInterface {
 
 /** Meta information about the run */
 interface LogMessageRunInterface {
-  /** The start date/time of the test */
+  /** The start date/time of the test in milliseconds */
   start: number
 
   /** a unique id for this test run */

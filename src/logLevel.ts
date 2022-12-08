@@ -1,5 +1,5 @@
 /** Defines the mapping between loglevel name and level number */
-const LOG_LEVEL_NAME_TO_NUM = {
+export const LOG_LEVEL_NAME_TO_NUM = {
   debug: 0,
   info: 1,
   warning: 2,
@@ -15,7 +15,7 @@ export const LEVEL_ERROR = 'error'
 export const LEVEL_FATAL = 'fatal'
 
 /** Defines the reverse map from levelnumber to name */
-const LOG_LEVEL_NUM_TO_NAME = [
+export const LOG_LEVEL_NUM_TO_NAME = [
   LEVEL_DEBUG,
   LEVEL_INFO,
   LEVEL_WARNING,
@@ -27,7 +27,7 @@ const LOG_LEVEL_NUM_TO_NAME = [
 export const DEFAULT_LOG_LEVEL = 3
 
 /** Max level number */
-const MAX_LOG_LEVEL = LOG_LEVEL_NUM_TO_NAME.length - 1
+export const MAX_LOG_LEVEL = LOG_LEVEL_NUM_TO_NAME.length - 1
 
 /**
  * takes a loglevel as number or string and returns the loglevel number

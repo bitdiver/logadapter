@@ -1,5 +1,5 @@
-import LogAdapterConsole from './LogAdapterConsole'
-import LogAdapterConsoleJson from './LogAdapterConsoleJson'
+import { LogAdapterConsole } from './LogAdapterConsole'
+import { LogAdapterConsoleJson } from './LogAdapterConsoleJson'
 import LogAdapterConsoleJsonElastic from './LogAdapterConsoleJsonElastic'
 import LogAdapterMemory from './LogAdapterMemory'
 import LogAdapterFile from './LogAdapterFile'

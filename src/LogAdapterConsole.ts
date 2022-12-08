@@ -5,19 +5,8 @@ import {
 } from './logLevel'
 import { LogMessageInterface } from './interfaceLogMessage'
 import { LogAdapterInterface } from './interfaceLogAdapter'
-
-interface LogAdapterConsoleOptions {
-  /** The loglevel for the logger */
-  logLevel?: number | string
-
-  /** The time zone to use. see https://moment.github.io/luxon/#/zones for more information. Default is the local time zone */
-  timeZone?: string
-
-  /** The timeformat to use */
-  timeFormat?: string
-}
-
-const DEFAULT_TIME_FORMAT = 'yyyy-MM-dd HH:mm:ss.SSS ZZ'
+import { LogAdapterConsoleOptions } from './interfaceLogAdpaterOptions'
+import { DEFAULT_TIME_FORMAT } from './constants'
 
 /**
  * Implements a console logAdapter
@@ -25,7 +14,6 @@ const DEFAULT_TIME_FORMAT = 'yyyy-MM-dd HH:mm:ss.SSS ZZ'
 export class LogAdapterConsole implements LogAdapterInterface {
   level: number
   timeFormat: string
-  timeZone?: string
 
   constructor(opts: LogAdapterConsoleOptions = {}) {
     if (opts.logLevel !== undefined) {
@@ -38,10 +26,6 @@ export class LogAdapterConsole implements LogAdapterInterface {
       this.timeFormat = opts.timeFormat
     } else {
       this.timeFormat = DEFAULT_TIME_FORMAT
-    }
-
-    if (opts.timeZone !== undefined) {
-      this.timeZone = opts.timeZone
     }
   }
 
@@ -78,11 +62,6 @@ export class LogAdapterConsole implements LogAdapterInterface {
     const newLevelString = getLogLevelName(newLevelNumber)
     logMessage.logLevel = newLevelString
 
-    // Set the time of the log
-    if (logMessage.meta.logTime === undefined) {
-      logMessage.meta.logTime = Date.now()
-    }
-
     if (newLevelNumber >= this.levelNumber) {
       await this._writeLog(logMessage)
     }
@@ -97,11 +76,6 @@ export class LogAdapterConsole implements LogAdapterInterface {
    */
   async _writeLog(logMessage: LogMessageInterface): Promise<void> {
     const meta = logMessage.meta
-
-    // Set the time of the log
-    if (meta.logTime === undefined) {
-      meta.logTime = Date.now()
-    }
 
     if (meta.step !== undefined) {
       // this is a step log

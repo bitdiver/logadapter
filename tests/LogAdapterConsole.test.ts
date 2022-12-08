@@ -100,7 +100,7 @@ test('log run', async () => {
   expect(resStep).toEqual([])
 })
 
-test.only('log test case', async () => {
+test('log test case', async () => {
   const logAdapter = new LogAdapterConsole({ logLevel: 2 })
 
   const resRun: any[] = []
@@ -121,10 +121,9 @@ test.only('log test case', async () => {
   logMessage.logLevel = 3
   delete logMessage.meta.step
 
-  debugger
   await logAdapter.log(logMessage)
 
-  expect(resRun).toEqual([logMessage])
+  expect(resRun).toEqual([])
   expect(resTc).toEqual([logMessage])
   expect(resStep).toEqual([])
 })
@@ -151,7 +150,7 @@ test('log step', async () => {
 
   await logAdapter.log(logMessage)
 
-  expect(resRun).toEqual([logMessage])
-  expect(resTc).toEqual([logMessage])
+  expect(resRun).toEqual([])
+  expect(resTc).toEqual([])
   expect(resStep).toEqual([logMessage])
 })
