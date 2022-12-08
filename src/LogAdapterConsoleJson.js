@@ -7,7 +7,7 @@ const LOG_LEVEL_NAME_TO_NUM = {
   warning: 2,
   warn: 2,
   error: 3,
-  fatal: 4,
+  fatal: 4
 }
 
 const LOG_LEVEL_NUM_TO_NAME = ['debug', 'info', 'warning', 'error', 'fatal']

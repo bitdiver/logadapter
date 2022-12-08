@@ -11,8 +11,8 @@ import {
   LEVEL_INFO,
   LEVEL_WARNING,
   LEVEL_ERROR,
-  LEVEL_FATAL,
-} from '../src/index'
+  LEVEL_FATAL
+} from '../src/index_old'
 
 test('LEVEL_DEBUG', () => {
   expect(LEVEL_DEBUG).toEqual('debug')

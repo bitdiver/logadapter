@@ -1,4 +1,4 @@
-import { LogAdapterConsoleJsonElastic } from '../src/index'
+import { LogAdapterConsoleJsonElastic } from '../src/index_old'
 
 test('init LogAdapter: default loglevel', async () => {
   const logAdapter = new LogAdapterConsoleJsonElastic()
@@ -81,11 +81,11 @@ test('LogLevel < level of Logadapter', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
     logLevel: 'debug',
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
   expect(res).toEqual([])
@@ -102,11 +102,11 @@ test('LogLevel >= level of Logadapter', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
     logLevel: 'error',
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
 
@@ -124,10 +124,10 @@ test('LogLevel not given. LogAdapter level = error', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
 
@@ -145,10 +145,10 @@ test('LogLevel not given. LogAdapter level = debug', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
 
@@ -166,10 +166,10 @@ test('LogLevel not given. LogAdapter level = fatal', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
 
@@ -188,10 +188,10 @@ test('log run', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
-    data: {},
+    data: {}
   }
 
   await logAdapter.log(logMessage)
@@ -211,13 +211,13 @@ test('log test case', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
+        start: 1533720241284
       },
       tc: {
-        id: 'gum',
-      },
+        id: 'gum'
+      }
     },
-    data: {},
+    data: {}
   }
 
   await logAdapter.log(logMessage)
@@ -237,14 +237,14 @@ test('log step', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
+        start: 1533720241284
       },
       tc: {
-        id: 'gum',
+        id: 'gum'
       },
-      step: { id: 'bo' },
+      step: { id: 'bo' }
     },
-    data: {},
+    data: {}
   }
 
   await logAdapter.log(logMessage)
@@ -259,16 +259,16 @@ test('show log step with json data content', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
+        start: 1533720241284
       },
       tc: {
-        id: 'gum',
+        id: 'gum'
       },
-      step: { id: 'bo' },
+      step: { id: 'bo' }
     },
     data: {
-      message: 'Could not clear the abo',
-    },
+      message: 'Could not clear the abo'
+    }
   }
 
   await logAdapter.log(logMessage)

@@ -1,4 +1,4 @@
-import LogAdapterConsole from './LogAdapterConsole'
+import LogAdapterConsole from './LogAdapterConsole_old'
 
 /**
  * This logadapter stores all the logs into memory.
@@ -36,7 +36,7 @@ export default class LogAdapterMemory extends LogAdapterConsole {
     if (this.logs[runId] === undefined) {
       this.logs[runId] = {
         logs: [],
-        testcases: {},
+        testcases: {}
       }
     }
   }
@@ -47,7 +47,7 @@ export default class LogAdapterMemory extends LogAdapterConsole {
         logs: [],
         steps: {},
         countCurrent: meta.tc.countCurrent,
-        countAll: meta.tc.countAll,
+        countAll: meta.tc.countAll
       }
     }
   }
@@ -69,7 +69,7 @@ export default class LogAdapterMemory extends LogAdapterConsole {
       data,
       logLevel,
       countCurrent: meta.tc.countCurrent,
-      countAll: meta.tc.countAll,
+      countAll: meta.tc.countAll
     })
   }
 
@@ -85,21 +85,21 @@ export default class LogAdapterMemory extends LogAdapterConsole {
         logs: [],
         steps: {},
         countCurrent: meta.tc.countCurrent,
-        countAll: meta.tc.countAll,
+        countAll: meta.tc.countAll
       }
     }
     if (
       this.logs[runId].testcases[testcaseName].steps[stepName] === undefined
     ) {
       this.logs[runId].testcases[testcaseName].steps[stepName] = {
-        logs: [],
+        logs: []
       }
     }
     this.logs[runId].testcases[testcaseName].steps[stepName].logs.push({
       data,
       logLevel,
       countCurrent: meta.step.countCurrent,
-      countAll: meta.step.countAll,
+      countAll: meta.step.countAll
     })
   }
 }

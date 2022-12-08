@@ -1,4 +1,4 @@
-import { LogAdapterMemory } from '../src/index'
+import { LogAdapterMemory } from '../src/index_old'
 
 test('init LogAdapter: default loglevel', async () => {
   const logAdapter = new LogAdapterMemory()
@@ -81,11 +81,11 @@ test('LogLevel < level of Logadapter', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
     logLevel: 'debug',
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
   expect(res).toEqual([])
@@ -102,11 +102,11 @@ test('LogLevel >= level of Logadapter', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
     logLevel: 'error',
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
 
@@ -124,10 +124,10 @@ test('LogLevel not given. LogAdapter level = error', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
 
@@ -145,10 +145,10 @@ test('LogLevel not given. LogAdapter level = debug', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
 
@@ -166,10 +166,10 @@ test('LogLevel not given. LogAdapter level = fatal', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
-    data: {},
+    data: {}
   }
   await logAdapter.log(logMessage)
 
@@ -196,10 +196,10 @@ test('log run', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
-      },
+        start: 1533720241284
+      }
     },
-    data: {},
+    data: {}
   }
 
   await logAdapter.log(logMessage)
@@ -229,13 +229,13 @@ test('log test case', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
+        start: 1533720241284
       },
       tc: {
-        id: 'gum',
-      },
+        id: 'gum'
+      }
     },
-    data: {},
+    data: {}
   }
 
   await logAdapter.log(logMessage)
@@ -265,14 +265,14 @@ test('log step', async () => {
   const logMessage = {
     meta: {
       run: {
-        start: 1533720241284,
+        start: 1533720241284
       },
       tc: {
-        id: 'gum',
+        id: 'gum'
       },
-      step: { id: 'bo' },
+      step: { id: 'bo' }
     },
-    data: {},
+    data: {}
   }
 
   await logAdapter.log(logMessage)
@@ -290,18 +290,18 @@ test('Test reset and log step', async () => {
     meta: {
       run: {
         start: 1533720241284,
-        id: '0815',
+        id: '0815'
       },
       tc: {
         id: 'gum',
         name: 'my tc name',
         countAll: 100,
-        countCurrent: 5,
+        countCurrent: 5
       },
-      step: { id: 'bo', name: 'my step name', countAll: 15, countCurrent: 3 },
+      step: { id: 'bo', name: 'my step name', countAll: 15, countCurrent: 3 }
     },
     data: {},
-    logLevel: 3,
+    logLevel: 3
   }
 
   await logAdapter.log(logMessage)
@@ -321,14 +321,14 @@ test('Test reset and log step', async () => {
                   countAll: 15,
                   countCurrent: 3,
                   data: {},
-                  logLevel: 'error',
-                },
-              ],
-            },
-          },
-        },
-      },
-    },
+                  logLevel: 'error'
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
   })
 
   logAdapter.reset()
@@ -343,11 +343,11 @@ test('Test log run', async () => {
     meta: {
       run: {
         start: 1533720241284,
-        id: '0815',
-      },
+        id: '0815'
+      }
     },
     data: { gum: 'bo' },
-    logLevel: 3,
+    logLevel: 3
   }
 
   await logAdapter.log(logMessage)
@@ -355,8 +355,8 @@ test('Test log run', async () => {
   expect(logAdapter.logs).toEqual({
     '0815': {
       logs: [{ data: { gum: 'bo' }, logLevel: 'error' }],
-      testcases: {},
-    },
+      testcases: {}
+    }
   })
 
   logAdapter.reset()
@@ -371,17 +371,17 @@ test('Test log test case', async () => {
     meta: {
       run: {
         start: 1533720241284,
-        id: '0815',
+        id: '0815'
       },
       tc: {
         id: 'gum',
         name: 'my tc name',
         countAll: 100,
-        countCurrent: 5,
-      },
+        countCurrent: 5
+      }
     },
     data: { gum: 'bo' },
-    logLevel: 3,
+    logLevel: 3
   }
 
   await logAdapter.log(logMessage)
@@ -398,13 +398,13 @@ test('Test log test case', async () => {
               countAll: 100,
               countCurrent: 5,
               data: { gum: 'bo' },
-              logLevel: 'error',
-            },
+              logLevel: 'error'
+            }
           ],
-          steps: {},
-        },
-      },
-    },
+          steps: {}
+        }
+      }
+    }
   })
 
   logAdapter.reset()

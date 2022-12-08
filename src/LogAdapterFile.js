@@ -3,7 +3,7 @@ import util from 'util'
 import path from 'path'
 import mkdirp from 'mkdirp'
 import { sprintf } from 'sprintf-js'
-import LogAdapterConsole from './LogAdapterConsole'
+import LogAdapterConsole from './LogAdapterConsole_old'
 
 const writeFile = util.promisify(fs.writeFile)
 const fileNameFree = util.promisify(fs.access)
@@ -97,7 +97,7 @@ export default class LogAdapterFile extends LogAdapterConsole {
       {
         meta: { logTime: meta.logTime, logTimeString: meta.logTimeString },
         data,
-        logLevel,
+        logLevel
       },
       null,
       2

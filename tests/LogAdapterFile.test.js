@@ -1,4 +1,4 @@
-import { LogAdapterFile } from '../src/index'
+import { LogAdapterFile } from '../src/index_old'
 import path from 'path'
 import rimraf from 'rimraf'
 import util from 'util'
@@ -16,7 +16,7 @@ test('Log Message Run', async () => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
-    timeZone: 60,
+    timeZone: 60
   })
 
   const logMessage = {
@@ -24,12 +24,12 @@ test('Log Message Run', async () => {
       run: {
         start: 1544432256132,
         id: 'runId', // RunEnvironment ID
-        name: 'suiteName',
+        name: 'suiteName'
       },
-      logTime: 1544432256132,
+      logTime: 1544432256132
     },
     data: { anyKey: 'some value' },
-    logLevel: 'error',
+    logLevel: 'error'
   }
 
   await logAdapter.log(logMessage)
@@ -46,7 +46,7 @@ test('Log Message Run', async () => {
   }
 
   expect(files).toEqual([
-    'Run_suiteName_2018-12-10_095736/2018-12-10_095736_error.json',
+    'Run_suiteName_2018-12-10_095736/2018-12-10_095736_error.json'
   ])
 })
 
@@ -54,7 +54,7 @@ test('Log Message Testcase', async () => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
-    timeZone: 60,
+    timeZone: 60
   })
 
   const tcCountCurrent = 3
@@ -65,19 +65,19 @@ test('Log Message Testcase', async () => {
       run: {
         start: 1544432286132,
         id: 'runId', // RunEnvironment ID
-        name: 'suiteName',
+        name: 'suiteName'
       },
       tc: {
         countCurrent: tcCountCurrent,
         countAll: tcCountAll,
         id: 'tcId', // TestcaseEnvironment ID
-        name: 'great tc name',
+        name: 'great tc name'
       },
 
-      logTime: 1544432286132,
+      logTime: 1544432286132
     },
     data: { anyKey: 'some value' },
-    logLevel: 'error',
+    logLevel: 'error'
   }
 
   await logAdapter.log(logMessage)
@@ -94,7 +94,7 @@ test('Log Message Testcase', async () => {
   }
 
   expect(files).toEqual([
-    'Run_suiteName_2018-12-10_095806/TC_03_great tc name/2018-12-10_095806_error.json',
+    'Run_suiteName_2018-12-10_095806/TC_03_great tc name/2018-12-10_095806_error.json'
   ])
 })
 
@@ -102,7 +102,7 @@ test('Log Message Step', async () => {
   const logAdapter = new LogAdapterFile({
     targetDir: LOG_PATH,
     timeFormat: 'YYYY-MM-DD_HHmmss',
-    timeZone: 60,
+    timeZone: 60
   })
 
   const tcCountCurrent = 3
@@ -115,25 +115,25 @@ test('Log Message Step', async () => {
       run: {
         start: 1544432296132,
         id: 'runId', // RunEnvironment ID
-        name: 'suiteName',
+        name: 'suiteName'
       },
       tc: {
         countCurrent: tcCountCurrent,
         countAll: tcCountAll,
         id: 'tcId', // TestcaseEnvironment ID
-        name: 'great tc name',
+        name: 'great tc name'
       },
       step: {
         countCurrent: stepCountCurrent,
         countAll: stepCountAll,
         id: 'stepId', // testcase instance
         name: 'great step name',
-        typ: 'singel',
+        typ: 'singel'
       },
-      logTime: 1544432296132,
+      logTime: 1544432296132
     },
     data: { anyKey: 'some value' },
-    logLevel: 'error',
+    logLevel: 'error'
   }
 
   await logAdapter.log(logMessage)
@@ -150,6 +150,6 @@ test('Log Message Step', async () => {
   }
 
   expect(files).toEqual([
-    'Run_suiteName_2018-12-10_095816/TC_03_great tc name/Step_087_great step name/2018-12-10_095816_error.json',
+    'Run_suiteName_2018-12-10_095816/TC_03_great tc name/Step_087_great step name/2018-12-10_095816_error.json'
   ])
 })
