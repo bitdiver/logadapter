@@ -1,7 +1,7 @@
 import { LogMessageInterface } from '../src/interfaceLogMessage'
 import { DateTime } from 'luxon'
 
-export function getDefaultLogmessage(): LogMessageInterface {
+export function getDefaultLogMessage(): LogMessageInterface {
   const timeNow = DateTime.fromISO('2022-06-25T10:12:00+02:00').toMillis()
   const timeStart = DateTime.fromISO('2022-06-25T10:11:00+02:00').toMillis()
   return {

@@ -5,7 +5,7 @@ import {
 } from './logLevel'
 import { LogMessageInterface } from './interfaceLogMessage'
 import { LogAdapterInterface } from './interfaceLogAdapter'
-import { LogAdapterConsoleOptions } from './interfaceLogAdpaterOptions'
+import { LogAdapterOptions } from './interfaceLogAdpaterOptions'
 import { DEFAULT_TIME_FORMAT } from './constants'
 
 /**
@@ -15,7 +15,7 @@ export class LogAdapterConsole implements LogAdapterInterface {
   level: number
   timeFormat: string
 
-  constructor(opts: LogAdapterConsoleOptions = {}) {
+  constructor(opts: LogAdapterOptions = {}) {
     if (opts.logLevel !== undefined) {
       this.level = getLogLevelNumber(opts.logLevel)
     } else {

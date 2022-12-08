@@ -1,9 +1,8 @@
 import {
   LogAdapterConsole,
   LogAdapterConsoleJson,
-  LogAdapterConsoleJsonElastic,
   LogAdapterMemory,
-  LogAdapterFile,
+  // LogAdapterFile,
   getLogAdapterConsole,
   getLogAdapterMemory,
   getLogAdapterFile,
@@ -12,7 +11,7 @@ import {
   LEVEL_WARNING,
   LEVEL_ERROR,
   LEVEL_FATAL
-} from '../src/index_old'
+} from '../src/index'
 
 test('LEVEL_DEBUG', () => {
   expect(LEVEL_DEBUG).toEqual('debug')
@@ -40,20 +39,15 @@ test('LogAdapterConsoleJson', () => {
   expect(logAdapter).toBeDefined()
 })
 
-test('LogAdapterConsoleJsonElastic', () => {
-  const logAdapter = new LogAdapterConsoleJsonElastic()
-  expect(logAdapter).toBeDefined()
-})
-
 test('LogAdapterMemory', () => {
   const logAdapter = new LogAdapterMemory()
   expect(logAdapter).toBeDefined()
 })
 
-test('LogAdapterFile', () => {
-  const logAdapter = new LogAdapterFile()
-  expect(logAdapter).toBeDefined()
-})
+// test('LogAdapterFile', () => {
+//   const logAdapter = new LogAdapterFile()
+//   expect(logAdapter).toBeDefined()
+// })
 
 test('getLogAdapterConsole', () => {
   const logAdapter = getLogAdapterConsole()

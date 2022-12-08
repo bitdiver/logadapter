@@ -1,5 +1,5 @@
 import { LogMessage, LogAdapterConsole } from '../src/index'
-import { getDefaultLogmessage } from './helper'
+import { getDefaultLogMessage } from './helper'
 
 test('init LogAdapter: default loglevel', async () => {
   const logAdapter = new LogAdapterConsole()
@@ -51,7 +51,7 @@ test('LogLevel < level of Logadapter', async () => {
     res.push(logMessage)
   }
 
-  const logMessage = getDefaultLogmessage()
+  const logMessage = getDefaultLogMessage()
   await logAdapter.log(logMessage)
   expect(res).toEqual([])
 })
@@ -64,7 +64,7 @@ test('LogLevel >= level of Logadapter', async () => {
     res.push(logMessage)
   }
 
-  const logMessage = getDefaultLogmessage()
+  const logMessage = getDefaultLogMessage()
   logMessage.logLevel = 'error'
   await logAdapter.log(logMessage)
 
@@ -88,7 +88,7 @@ test('log run', async () => {
     resStep.push(logMessage)
   }
 
-  const logMessage = getDefaultLogmessage()
+  const logMessage = getDefaultLogMessage()
   logMessage.logLevel = 3
   delete logMessage.meta.tc
   delete logMessage.meta.step
@@ -117,7 +117,7 @@ test('log test case', async () => {
     resStep.push(logMessage)
   }
 
-  const logMessage = getDefaultLogmessage()
+  const logMessage = getDefaultLogMessage()
   logMessage.logLevel = 3
   delete logMessage.meta.step
 
@@ -145,7 +145,7 @@ test('log step', async () => {
     resStep.push(logMessage)
   }
 
-  const logMessage = getDefaultLogmessage()
+  const logMessage = getDefaultLogMessage()
   logMessage.logLevel = 3
 
   await logAdapter.log(logMessage)

@@ -1,7 +1,6 @@
 import { LogAdapterConsole } from './LogAdapterConsole'
 import { LogAdapterConsoleJson } from './LogAdapterConsoleJson'
 import LogAdapterConsoleJsonElastic from './LogAdapterConsoleJsonElastic'
-import LogAdapterMemory from './LogAdapterMemory'
 import LogAdapterFile from './LogAdapterFile'
 
 const LEVEL_DEBUG = 'debug'
@@ -50,16 +49,6 @@ function getLogAdapterConsoleJsonElastic(opts) {
 /**
  * returns the logAdapter
  */
-function getLogAdapterMemory(opts) {
-  if (logAdapterMemory === undefined) {
-    logAdapterMemory = new LogAdapterMemory(opts)
-  }
-  return logAdapterMemory
-}
-
-/**
- * returns the logAdapter
- */
 function getLogAdapterFile(opts) {
   if (logAdapterFile === undefined) {
     logAdapterFile = new LogAdapterFile(opts)
@@ -71,7 +60,6 @@ export {
   LogAdapterConsole,
   LogAdapterConsoleJson,
   LogAdapterConsoleJsonElastic,
-  LogAdapterMemory,
   LogAdapterFile,
   getLogAdapterConsole,
   getLogAdapterConsoleJson,

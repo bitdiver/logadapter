@@ -1,23 +1,25 @@
 export interface LogMessageInterface {
-  meta: {
-    /** Information about the run */
-    run: LogMessageRunInterface
-
-    /** Information about the the testcase */
-    tc?: LogMessageTestcaseInterface
-
-    /** Meta information about the step */
-    step?: LogMessageStepInterface
-
-    /** The timestamp when the message was created in milliseconds */
-    logTime?: number
-  }
+  meta: LogMessageMetaInterface
 
   /** The data which should be logged */
   data: any
 
   /** The log level */
   logLevel: number | string
+}
+
+export interface LogMessageMetaInterface {
+  /** Information about the run */
+  run: LogMessageRunInterface
+
+  /** Information about the the testcase */
+  tc?: LogMessageTestcaseInterface
+
+  /** Meta information about the step */
+  step?: LogMessageStepInterface
+
+  /** The timestamp when the message was created in milliseconds */
+  logTime?: number
 }
 
 /** Meta information about the run */

@@ -1,4 +1,4 @@
-export interface LogAdapterConsoleOptions {
+export interface LogAdapterOptions {
   /** The loglevel for the logger */
   logLevel?: number | string
 

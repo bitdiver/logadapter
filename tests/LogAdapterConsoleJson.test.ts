@@ -1,6 +1,6 @@
 import clone from 'clone'
 import { LogAdapterConsoleJson } from '../src/index'
-import { getDefaultLogmessage } from './helper'
+import { getDefaultLogMessage } from './helper'
 
 test('log test case', async () => {
   console.log = jest.fn() // eslint-disable-line no-console
@@ -8,7 +8,7 @@ test('log test case', async () => {
   const logAdapter = new LogAdapterConsoleJson({ logLevel: 2 })
 
   // A message without a step is not logged
-  const logMessage = getDefaultLogmessage()
+  const logMessage = getDefaultLogMessage()
   logMessage.logLevel = 3
   delete logMessage.meta.step
 
@@ -24,7 +24,7 @@ test('log step', async () => {
   const logAdapter = new LogAdapterConsoleJson({ logLevel: 2 })
 
   // this is a run message
-  const logMessage = getDefaultLogmessage()
+  const logMessage = getDefaultLogMessage()
   logMessage.logLevel = 3
 
   const expectedLogMessage: any = clone(logMessage)
@@ -44,7 +44,7 @@ test('log step, loglevel < loglevel logadapter', async () => {
   const logAdapter = new LogAdapterConsoleJson({ logLevel: 2 })
 
   // this is a run message
-  const logMessage = getDefaultLogmessage()
+  const logMessage = getDefaultLogMessage()
   logMessage.logLevel = 1
 
   await logAdapter.log(logMessage)
