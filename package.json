@@ -2,7 +2,7 @@
 	"name": "@bitdiver/logadapter",
 	"version": "0.0.0-semantic-release",
 	"description": "",
-	"main": "lib/index.js",
+	"main": "dist/src/index.js",
 	"publishConfig": {
 		"access": "public"
 	},
@@ -34,6 +34,9 @@
 			"name": "Torsten Link",
 			"email": "torstenlink@gmx.de"
 		}
+	],
+	"files": [
+		"dist/src/**/*"
 	],
 	"license": "ISC",
 	"devDependencies": {
