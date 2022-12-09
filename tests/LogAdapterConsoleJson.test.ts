@@ -1,5 +1,6 @@
 import clone from 'clone'
-import { LogAdapterConsoleJson } from '../src/index'
+import { DateTime } from 'luxon'
+import { DEFAULT_TIME_FORMAT, LogAdapterConsoleJson } from '../src/index'
 import { getDefaultLogMessage } from './helper'
 
 test('log test case', async () => {
@@ -27,10 +28,13 @@ test('log step', async () => {
   const logMessage = getDefaultLogMessage()
   logMessage.logLevel = 3
 
+  const timeNow = DateTime.fromISO('2022-06-25T10:12:00+02:00')
+  const timeStart = DateTime.fromISO('2022-06-25T10:11:00+02:00')
+
   const expectedLogMessage: any = clone(logMessage)
   expectedLogMessage.logLevel = 'error'
-  expectedLogMessage.meta.logTime = '2022-06-25 10:12:00.000 +02:00'
-  expectedLogMessage.meta.run.start = '2022-06-25 10:11:00.000 +02:00'
+  expectedLogMessage.meta.logTime = timeNow.toFormat(DEFAULT_TIME_FORMAT)
+  expectedLogMessage.meta.run.start = timeStart.toFormat(DEFAULT_TIME_FORMAT)
 
   await logAdapter.log(logMessage)
 
