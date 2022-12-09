@@ -1,4 +1,4 @@
-import { LogMessage, LogAdapterConsole } from '../src/index'
+import { LogMessageInterface, LogAdapterConsole } from '../src/index'
 import { getDefaultLogMessage } from './helper'
 
 test('init LogAdapter: default loglevel', async () => {
@@ -47,7 +47,7 @@ test('LogLevel < level of Logadapter', async () => {
   const logAdapter = new LogAdapterConsole()
 
   const res: any[] = []
-  logAdapter._writeLog = async (logMessage: LogMessage) => {
+  logAdapter._writeLog = async (logMessage: LogMessageInterface) => {
     res.push(logMessage)
   }
 
@@ -60,7 +60,7 @@ test('LogLevel >= level of Logadapter', async () => {
   const logAdapter = new LogAdapterConsole()
 
   const res: any[] = []
-  logAdapter._writeLog = async (logMessage: LogMessage) => {
+  logAdapter._writeLog = async (logMessage: LogMessageInterface) => {
     res.push(logMessage)
   }
 
@@ -78,13 +78,13 @@ test('log run', async () => {
   const resTc: any[] = []
   const resStep: any[] = []
 
-  logAdapter._logRun = async (logMessage: LogMessage) => {
+  logAdapter._logRun = async (logMessage: LogMessageInterface) => {
     resRun.push(logMessage)
   }
-  logAdapter._logTestcase = async (logMessage: LogMessage) => {
+  logAdapter._logTestcase = async (logMessage: LogMessageInterface) => {
     resTc.push(logMessage)
   }
-  logAdapter._logStep = async (logMessage: LogMessage) => {
+  logAdapter._logStep = async (logMessage: LogMessageInterface) => {
     resStep.push(logMessage)
   }
 
@@ -107,13 +107,13 @@ test('log test case', async () => {
   const resTc: any[] = []
   const resStep: any[] = []
 
-  logAdapter._logRun = async (logMessage: LogMessage) => {
+  logAdapter._logRun = async (logMessage: LogMessageInterface) => {
     resRun.push(logMessage)
   }
-  logAdapter._logTestcase = async (logMessage: LogMessage) => {
+  logAdapter._logTestcase = async (logMessage: LogMessageInterface) => {
     resTc.push(logMessage)
   }
-  logAdapter._logStep = async (logMessage: LogMessage) => {
+  logAdapter._logStep = async (logMessage: LogMessageInterface) => {
     resStep.push(logMessage)
   }
 
@@ -135,13 +135,13 @@ test('log step', async () => {
   const resTc: any[] = []
   const resStep: any[] = []
 
-  logAdapter._logRun = async (logMessage: LogMessage) => {
+  logAdapter._logRun = async (logMessage: LogMessageInterface) => {
     resRun.push(logMessage)
   }
-  logAdapter._logTestcase = async (logMessage: LogMessage) => {
+  logAdapter._logTestcase = async (logMessage: LogMessageInterface) => {
     resTc.push(logMessage)
   }
-  logAdapter._logStep = async (logMessage: LogMessage) => {
+  logAdapter._logStep = async (logMessage: LogMessageInterface) => {
     resStep.push(logMessage)
   }
 

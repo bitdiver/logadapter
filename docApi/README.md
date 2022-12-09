@@ -1,4 +1,4 @@
-@bitdiver/logadapter / [Exports](docApi/modules.md)
+@bitdiver/logadapter / [Exports](modules.md)
 
 # LogAdapter
 

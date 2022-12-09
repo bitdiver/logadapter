@@ -4,9 +4,15 @@ import { LogAdapterConsoleJson } from './LogAdapterConsoleJson'
 import { LogAdapterFile } from './LogAdapterFile'
 import { LogAdapterMemory } from './LogAdapterMemory'
 
+export { DEFAULT_TIME_FORMAT, DEFAULT_TIME_FORMAT_FILE } from './constants'
 export { LogAdapterInterface } from './interfaceLogAdapter'
-export { LogMessageInterface as LogMessage } from './interfaceLogMessage'
-export { LogAdapterConsole, LogAdapterConsoleJson, LogAdapterMemory }
+export { LogMessageInterface } from './interfaceLogMessage'
+export {
+  LogAdapterConsole,
+  LogAdapterConsoleJson,
+  LogAdapterMemory,
+  LogAdapterFile
+}
 
 export {
   LEVEL_DEBUG,

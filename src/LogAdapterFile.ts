@@ -1,143 +1,178 @@
-// import fs from 'fs'
-// import util from 'util'
-// import path from 'path'
-// import mkdirp from 'mkdirp'
-// import { sprintf } from 'sprintf-js'
+import fs from 'fs'
+import path from 'path'
+import mkdirp from 'mkdirp'
+import clone from 'clone'
+import { sprintf } from 'sprintf-js'
 import { LogAdapterConsole } from './LogAdapterConsole'
+import { LogAdapterFileOptions } from './interfaceLogAdpaterOptions'
+import {
+  LogMessageInterface,
+  LogMessageMetaInterface
+} from './interfaceLogMessage'
+import { getTimeString } from './getTimeString'
+import { getLogLevelName } from './logLevel'
+import { DEFAULT_TIME_FORMAT_FILE } from './constants'
 
-// const writeFile = util.promisify(fs.writeFile)
-// const fileNameFree = util.promisify(fs.access)
+/**
+ * Implements a logAdapter. The results are written to the file system
+ */
+export class LogAdapterFile extends LogAdapterConsole {
+  targetDir: string
 
-export class LogAdapterFile extends LogAdapterConsole {}
-// /**
-//  * Implements a default logAdapter. The results will be written to the file system
-//  * @class
-//  */
-// export class LogAdapterFile extends LogAdapterConsole {
-//   constructor(opts = {}) {
-//     super(opts)
+  /* This format is for creating the file names  */
+  timeFormatFileName = DEFAULT_TIME_FORMAT_FILE
 
-//     this.targetDir = opts.targetDir ? opts.targetDir : 'log'
-//   }
+  constructor(opts: LogAdapterFileOptions = {}) {
+    super(opts)
+    this.targetDir = opts.targetDir ? opts.targetDir : 'log'
+    if (opts.timeFormatFileName !== undefined) {
+      this.timeFormatFileName = opts.timeFormatFileName
+    }
+  }
 
-//   /**
-//    * Logs the data of a run
-//    * @param meta {object} The meta data for this log entry
-//    * @param dat {object} The data for this log entry
-//    * @param logLevel {string} The logLevel as a string
-//    */
-//   async _logRun(meta, data, logLevel) {
-//     await this._writeLogFile(meta, data, logLevel, this._getRunTargetPath(meta))
-//   }
+  /**
+   * Logs the data of a run
+   * @param logMessage - The logMessage
+   */
+  async _logRun(logMessage: LogMessageInterface): Promise<void> {
+    const targetPath = this._getRunTargetPath(logMessage.meta)
+    await this._writeLogFile({ logMessage, targetPath })
+  }
 
-//   /**
-//    * Log the data of a test case
-//    * @param meta {object} The meta data for this log entry
-//    * @param dat {object} The data for this log entry
-//    * @param logLevel {string} The logLevel as a string
-//    */
-//   async _logTestcase(meta, data, logLevel) {
-//     const targetPath = this._getRunTargetPath(meta)
+  /**
+   * Log the data of a test case
+   * @param logMessage - The logMessage
+   */
+  async _logTestcase(logMessage: LogMessageInterface): Promise<void> {
+    const targetPath = this._getRunTargetPath(logMessage.meta)
 
-//     const tcCountAllLength = String(meta.tc.countAll).length
-//     const tcNumberStr = sprintf(`%0${tcCountAllLength}d`, meta.tc.countCurrent)
+    const tcCountAllLength = String(logMessage.meta.tc?.tcCountAll).length
+    const tcNumberStr = sprintf(
+      `%0${tcCountAllLength}d`,
+      logMessage.meta.tc?.tcCountCurrent
+    )
+    targetPath.push(`TC_${tcNumberStr}_${logMessage.meta.tc?.name}`)
 
-//     targetPath.push(`TC_${tcNumberStr}_${meta.tc.name}`)
-//     await this._writeLogFile(meta, data, logLevel, targetPath)
-//   }
+    await this._writeLogFile({ logMessage, targetPath })
+  }
 
-//   /**
-//    * Log the data of a step
-//    * @param meta {object} The meta data for this log entry
-//    * @param dat {object} The data for this log entry
-//    * @param logLevel {string} The logLevel as a string
-//    */
-//   async _logStep(meta, data, logLevel) {
-//     const targetPath = this._getRunTargetPath(meta)
+  /**
+   * Log the data of a step
+   * @param logMessage - The logMessage
+   */
+  async _logStep(logMessage: LogMessageInterface): Promise<void> {
+    const targetPath = this._getRunTargetPath(logMessage.meta)
 
-//     const tcCountAllLength = String(meta.tc.countAll).length
-//     const tcNumberStr = sprintf(`%0${tcCountAllLength}d`, meta.tc.countCurrent)
-//     targetPath.push(`TC_${tcNumberStr}_${meta.tc.name}`)
+    const tcCountAllLength = String(logMessage.meta.tc?.tcCountAll).length
+    const tcNumberStr = sprintf(
+      `%0${tcCountAllLength}d`,
+      logMessage.meta.tc?.tcCountCurrent
+    )
+    targetPath.push(`TC_${tcNumberStr}_${logMessage.meta.tc?.name}`)
 
-//     const stringCountLength = String(meta.step.countAll).length
-//     const stepNumber = sprintf(
-//       `%0${stringCountLength}d`,
-//       meta.step.countCurrent
-//     )
-//     targetPath.push(`Step_${stepNumber}_${meta.step.name}`)
-//     await this._writeLogFile(meta, data, logLevel, targetPath)
-//   }
+    const stringCountLength = String(logMessage.meta.step?.stepCountAll).length
+    const stepNumber = sprintf(
+      `%0${stringCountLength}d`,
+      logMessage.meta.step?.stepCountCurrent
+    )
+    targetPath.push(`Step_${stepNumber}_${logMessage.meta.step?.name}`)
+    await this._writeLogFile({ logMessage, targetPath })
+  }
 
-//   /**
-//    * Creates the target path for the run
-//    * @param meta {object} The meta data for this log entry
-//    */
-//   _getRunTargetPath(meta) {
-//     if (meta.run.name !== undefined && meta.run.name !== '') {
-//       return [this.targetDir, `Run_${meta.run.name}_${meta.run.startString}`]
-//     }
-//     return [this.targetDir, `Run_${meta.run.startString}`]
-//   }
+  /**
+   * Create the target Path segments from the run
+   * @param meta - The meta information
+   * @returns List of path segements
+   */
+  _getRunTargetPath(meta: LogMessageMetaInterface): string[] {
+    const metaRunStartTimeString: string = getTimeString({
+      time: meta.run.start,
+      format: this.timeFormatFileName
+    })
 
-//   /**
-//    * Writes the log to the file system
-//    * @param meta {object} The meta data for this log entry
-//    * @param dat {object} The data for this log entry
-//    * @param logLevel {string} The logLevel as a string
-//    * @param targetPath {array} An array of path segemnts
-//    */
-//   async _writeLogFile(meta, data, logLevel, targetPath) {
-//     await mkdirp(path.join(...targetPath))
+    if (meta.run.name !== undefined && meta.run.name !== '') {
+      return [this.targetDir, `Run_${meta.run.name}_${metaRunStartTimeString}`]
+    }
+    return [this.targetDir, `Run_${metaRunStartTimeString}`]
+  }
 
-//     const file = await this._getFileName(
-//       targetPath,
-//       meta.logTimeString,
-//       logLevel
-//     )
-//     const fileContent = JSON.stringify(
-//       {
-//         meta: { logTime: meta.logTime, logTimeString: meta.logTimeString },
-//         data,
-//         logLevel
-//       },
-//       null,
-//       2
-//     )
+  /**
+   * Writes the log to the target directory
+   * @param request - The request as described
+   */
+  async _writeLogFile(request: {
+    logMessage: LogMessageInterface
+    targetPath: string[]
+  }): Promise<void> {
+    const { logMessage, targetPath } = request
+    await mkdirp(path.join(...targetPath))
 
-//     await writeFile(file, fileContent)
-//   }
+    const metaLogTimeString: string = getTimeString({
+      time: logMessage.meta.logTime,
+      format: this.timeFormat
+    })
 
-//   /**
-//    * Creates a filename which does not yet exists
-//    * @param targetPath {array} An array of path segements
-//    * @param timeStamp {string} The current time stamp
-//    * @param logLevel {string} The loglevel of this message
-//    * @return fileName {string} A new created not existing file name
-//    */
-//   async _getFileName(targetPath, timeStamp, logLevel) {
-//     let fileName
-//     let fileIsOk
-//     let seq = 0
-//     do {
-//       if (seq === 0) {
-//         fileName = path.join(...targetPath, `${timeStamp}_${logLevel}.json`)
-//       } else {
-//         fileName = path.join(
-//           ...targetPath,
-//           `${timeStamp}_${seq}_${logLevel}.json`
-//         )
-//       }
+    const startTimeString: string = getTimeString({
+      time: logMessage.meta.run.start,
+      format: this.timeFormat
+    })
 
-//       try {
-//         await fileNameFree(fileName, fs.constants.F_OK)
-//         fileIsOk = false
-//       } catch (e) {
-//         fileIsOk = true
-//       }
+    const fileTimeString: string = getTimeString({
+      time: logMessage.meta.logTime,
+      format: this.timeFormatFileName
+    })
 
-//       seq++
-//     } while (!fileIsOk)
+    const file = await this._getFileName({
+      targetPath,
+      timeStamp: fileTimeString,
+      logLevel: getLogLevelName(logMessage.logLevel)
+    })
 
-//     return fileName
-//   }
-// }
+    const logMessagePrint: any = clone(logMessage)
+    logMessagePrint.meta.logTimeString = metaLogTimeString
+    logMessagePrint.meta.run.startString = startTimeString
+
+    const fileContent = JSON.stringify(logMessagePrint, null, 2)
+
+    await fs.promises.writeFile(file, fileContent)
+  }
+
+  /**
+   * Creates a new file name which does not exists. It will try to create a unique name until
+   * it finds one
+   * @param request - The request as defined
+   * @returns fileName - The created file name
+   */
+  async _getFileName(request: {
+    targetPath: string[]
+    timeStamp: string
+    logLevel: string
+  }): Promise<string> {
+    const { targetPath, timeStamp, logLevel } = request
+
+    let fileName
+    let fileIsOk
+    let seq = 0
+    do {
+      if (seq === 0) {
+        fileName = path.join(...targetPath, `${timeStamp}_${logLevel}.json`)
+      } else {
+        fileName = path.join(
+          ...targetPath,
+          `${timeStamp}_${seq}_${logLevel}.json`
+        )
+      }
+
+      try {
+        await fs.promises.access(fileName, fs.constants.F_OK)
+        fileIsOk = false
+      } catch (e) {
+        fileIsOk = true
+      }
+
+      seq++
+    } while (!fileIsOk)
+
+    return fileName
+  }
+}

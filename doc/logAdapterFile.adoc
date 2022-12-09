@@ -10,8 +10,10 @@ test case. And again in the test case one directory per step.
 [source, js]
 ----
 const opts = {
-  targetDir: 'logs'   <1>
+  targetDir: 'logs'                        <1>
+  timeFormatFileName: 'yyyy-MM-dd_HHmmss'  <2>
 }
 ----
 <1> The constructor arguments are the 'targetDir'. All the logs will be stored under this directory.
 This parameter defaults to ''log''
+<2> The format used to create the file names.
