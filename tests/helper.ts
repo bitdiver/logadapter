@@ -48,7 +48,7 @@ export function getDefaultLogMessage(): LogMessageInterface {
         name: 'stepName_1',
 
         /** The type of this step */
-        typ: 'normal'
+        type: 'normal'
       },
 
       /** The timestamp when the message was created */

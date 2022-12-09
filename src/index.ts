@@ -6,7 +6,7 @@ import { LogAdapterMemory } from './LogAdapterMemory'
 
 export { DEFAULT_TIME_FORMAT, DEFAULT_TIME_FORMAT_FILE } from './constants'
 export { LogAdapterInterface } from './interfaceLogAdapter'
-export { LogMessageInterface } from './interfaceLogMessage'
+export { LogMessageInterface, LogMessageMetaInterface } from './interfaceLogMessage'
 export {
   LogAdapterConsole,
   LogAdapterConsoleJson,

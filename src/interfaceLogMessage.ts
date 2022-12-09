@@ -64,5 +64,5 @@ interface LogMessageStepInterface {
   name: string
 
   /** The type of this step */
-  typ: 'singel' | 'normal'
+  type: 'single' | 'normal'
 }
