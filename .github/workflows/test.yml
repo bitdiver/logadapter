@@ -1,7 +1,7 @@
-# releases the current code in the GitHub repository after all tests
+# Tests the current code in the GitHub repository after all tests
 # where successful.
 
-name: Release
+name: Test
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
