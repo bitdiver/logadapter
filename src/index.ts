@@ -6,7 +6,10 @@ import { LogAdapterMemory } from './LogAdapterMemory'
 
 export { DEFAULT_TIME_FORMAT, DEFAULT_TIME_FORMAT_FILE } from './constants'
 export { LogAdapterInterface } from './interfaceLogAdapter'
-export { LogMessageInterface, LogMessageMetaInterface } from './interfaceLogMessage'
+export {
+  LogMessageInterface,
+  LogMessageMetaInterface
+} from './interfaceLogMessage'
 export {
   LogAdapterConsole,
   LogAdapterConsoleJson,
@@ -19,7 +22,9 @@ export {
   LEVEL_INFO,
   LEVEL_WARNING,
   LEVEL_ERROR,
-  LEVEL_FATAL
+  LEVEL_FATAL,
+  getLogLevelNumber,
+  getLogLevelName
 } from './logLevel'
 
 // Stores the logger instance
