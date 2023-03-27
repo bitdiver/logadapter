@@ -44,7 +44,7 @@
 		"@types/clone": "2.1.1",
 		"@types/luxon": "3.2.0",
 		"@types/sprintf-js": "1.1.2",
-		"@xhubio/build-base": "1.0.136",
+		"@xhubio/build-base": "1.0.137",
 		"globby": "11.1.0",
 		"rimraf": "3.0.2"
 	},
