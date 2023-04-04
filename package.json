@@ -42,7 +42,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@types/clone": "2.1.1",
-		"@types/luxon": "3.2.2",
+		"@types/luxon": "3.3.0",
 		"@types/sprintf-js": "1.1.2",
 		"@xhubio/build-base": "1.0.142",
 		"globby": "11.1.0",
