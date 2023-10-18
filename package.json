@@ -43,7 +43,7 @@
 	"devDependencies": {
 		"@types/clone": "2.1.3",
 		"@types/luxon": "3.3.3",
-		"@types/sprintf-js": "1.1.2",
+		"@types/sprintf-js": "1.1.3",
 		"@xhubio/build-base": "1.0.226",
 		"globby": "11.1.0",
 		"rimraf": "3.0.2"
